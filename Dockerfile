@@ -13,8 +13,7 @@ RUN pip install -r requirements.txt
 COPY . .
 
 EXPOSE 8080
-#RUN python manage.py runserver 0.0.0.0:8080
-#RUN daphne -b 0.0.0.0 -p 8080 main.asgi:application
+
 #CMD ["daphne", "-b", "0.0.0.0", "-p", "8080", "main.asgi:application"]
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8080"]
-#ENTRYPOINT honcho start
+

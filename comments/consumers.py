@@ -1,10 +1,6 @@
-
 from djangochannelsrestframework.generics import GenericAsyncAPIConsumer
-from djangochannelsrestframework.mixins import ListModelMixin, CreateModelMixin, PaginatedModelListMixin, \
-    UpdateModelMixin, DeleteModelMixin, PatchModelMixin
-
+from djangochannelsrestframework.mixins import CreateModelMixin, PaginatedModelListMixin, DeleteModelMixin, PatchModelMixin
 from djangochannelsrestframework.pagination import WebsocketLimitOffsetPagination
-
 from comments.models import Comments
 from comments.serializers import CommentsSerializer
 

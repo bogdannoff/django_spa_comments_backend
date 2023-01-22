@@ -15,16 +15,12 @@ class UserSerializer(serializers.ModelSerializer):
 
 class CommentsSerializer(serializers.ModelSerializer):
 
-    # user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     user = UserSerializer()
 
     class Meta:
         model = Comments
         fields = '__all__'
-        # extra_kwargs = {
-        #     'complete': {'read_only': True},
-        #     'target_date': {'validators': [DateGreaterEqualToday()]}
-        # }
+
 
     def create(self, validated_data):
         user_data = validated_data.pop('user')
