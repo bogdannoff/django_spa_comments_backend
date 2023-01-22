@@ -8,10 +8,13 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
-    build: .
+    build:
+      context: ./django_spa_comments/
+      dockerfile: Dockerfile
     ports:
       - "8080:8080"
-    command: honcho start
+    command: bash -c "python ./django_spa_comments/manage.py migrate &&
+                      python ./django_spa_comments/manage.py runserver 0.0.0.0:8080"
     volumes:
       - .:/app
 
@@ -22,6 +25,19 @@ services:
       POSTGRES_USER: "django_spa_comments"
       POSTGRES_PASSWORD: "pass"
       SECRET_KEY: 123
+
+  frontend:
+    restart: always
+    command : npm start
+    container_name: front
+    build:
+      context: ./react_spa_comments/comments/
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    depends_on:
+      - web
 
   redis:
     container_name: django_spa_comments_redis
